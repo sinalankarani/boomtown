@@ -130,12 +130,11 @@ module.exports = postgres => {
       const tagsQuery = {
         text: `SELECT * FROM tags
         INNER JOIN itemtags
-        ON itemtags.id = tags.id
+        ON itemtags.tagid = tags.id
         WHERE itemid = $1;
         `,
         values: [id]
       };
-      console.log(id);
       const tags = await postgres.query(tagsQuery);
       return tags.rows;
     },
@@ -171,21 +170,19 @@ module.exports = postgres => {
               const { title, description, tags } = item;
 
               // Insert new Item
-              const newItem = {
+              const newItemQuery = {
                 text: `INSERT INTO items (title, description, ownerid) VALUES ($1, $2, $3) RETURNING *;`,
-                values: [title, description, ownerid]
+                values: [title, description, user]
               };
-              const newItemQuery = await postgres.query(newItem);
-
-              // Generate new Item query
+              const newItem = await postgres.query(newItemQuery);
               const newItemId = newItem.rows[0].id;
 
               const newTag = {
-                text: `INSERT INTO itemtags(itemid, id) 
+                text: `INSERT INTO itemtags(tagid, itemid) 
                         VALUES ${tagsQueryString([...tags], newItemId, "")}`,
-                values: [tags.map(tag => tag.id)]
+                values: tags.map(tag => tag.id)
               };
-              const newTagQuery = await postgres.query(newTag);
+              await postgres.query(newTag);
 
               client.query("COMMIT", err => {
                 if (err) {
@@ -193,7 +190,6 @@ module.exports = postgres => {
                 }
                 // release the client back to the pool
                 done();
-                // Uncomment this resolve statement when you're ready!
                 resolve(newItem.rows[0]);
                 // -------------------------------
               });

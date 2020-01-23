@@ -13,7 +13,7 @@ const queryResolvers = app => ({
      *  the user's information cryptographically encoded inside.
      *
      *  To provide information about the user's session to the app, return the user.
-     *  If there is no user, the user has signed out, in which case user will be null.
+     *  If there is no user, the user has signed out, in which case user will be null.``
      */
     return null;
   },

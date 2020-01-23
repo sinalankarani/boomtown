@@ -3,8 +3,6 @@ const { ApolloError } = require("apollo-server");
 const relationResolvers = {
   User: {
     /**
-     *  @TODO: Advanced resolvers
-     *
      *  The User GraphQL type has two fields that are not present in the
      *  user table in Postgres: items and borrowed.
      *
@@ -12,18 +10,22 @@ const relationResolvers = {
      *  Items (GraphQL type) the user has lent (items) and borrowed (borrowed).
      *
      */
-    // @TODO: Uncomment these lines after you define the User type with these fields
-    // items() {
-    //   // @TODO: Replace this mock return statement with the correct items from Postgres
-    //   return []
-    //   // -------------------------------
-    // },
-    // borrowed() {
-    //   // @TODO: Replace this mock return statement with the correct items from Postgres
-    //   return []
-    //   // -------------------------------
-    // }
-    // -------------------------------
+    async items({ id }, args, { pgResource }, info) {
+      try {
+        const items = await pgResource.getItemsForUser(id);
+        return items;
+      } catch (e) {
+        throw new ApolloError(e);
+      }
+    },
+    async borrowed({ id }, args, { pgResource }, info) {
+      try {
+        const borrowed = await pgResource.getBorrowedItemsForUser(id);
+        return borrowed || null;
+      } catch (e) {
+        throw new ApolloError(e);
+      }
+    }
   },
 
   Item: {
@@ -37,7 +39,6 @@ const relationResolvers = {
      * a User (GraphQL type) and tags should return a list of Tags (GraphQL type)
      *
      */
-    // @TODO: Uncomment these lines after you define the Item type with these fields
     async itemowner({ ownerid }, args, { pgResource }, info) {
       try {
         const itemowner = await pgResource.getUserById(ownerid);
@@ -46,9 +47,9 @@ const relationResolvers = {
         throw new ApolloError(e);
       }
     },
-    async tags({ itemid }, { args }, { pgResource }, info) {
+    async tags({ id }, args, { pgResource }, info) {
       try {
-        const tags = await pgResource.getTagsForItem(itemid);
+        const tags = await pgResource.getTagsForItem(id);
         return tags;
       } catch (e) {
         throw new ApolloError(e);
@@ -57,15 +58,10 @@ const relationResolvers = {
     async borrower({ borrowerid }, args, { pgResource }, info) {
       try {
         const borrower = await pgResource.getUserById(borrowerid);
-        return borrower;
+        return borrower || null;
       } catch (e) {
         throw new ApolloError(e);
       }
-
-      /*
-       * @TODO: Replace this mock return statement with the correct user from Postgres
-       * or null in the case where the item has not been borrowed.
-       */
     }
   }
 };
