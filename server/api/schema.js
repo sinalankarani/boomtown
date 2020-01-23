@@ -11,7 +11,7 @@ const { gql } = require("apollo-server-express");
  * We will create the custom Date scalar together.
  */
 module.exports = gql`
-  # scalar Date
+  scalar Date
 
   type Item {
     id: ID!
@@ -19,33 +19,43 @@ module.exports = gql`
     imageurl: String
     description: String!
     itemowner: User!
-    tags: [Tags]
+    tags: [Tag]
     created: Date!
     borrower: User
   }
 
   type User {
-    _: Boolean
+    id: ID!
+    email: String!
+    fullname: String!
+    bio: String
+    items: [Item]
+    borrowed: [Item]
   }
 
   type Tag {
-    _: Boolean
+    id: ID!
+    title: String!
   }
 
   type AuthPayload {
-    _: Boolean
+    token: String
+    user: User
   }
 
   input AssignedTag {
-    _: Boolean
+    id: ID!
+    title: String!
   }
 
   input AssignedBorrower {
-    _: Boolean
+    id: ID!
   }
 
   input NewItemInput {
-    _: Boolean
+    title: String!
+    description: String
+    tags: [AssignedTag]!
   }
 
   type Query {
@@ -55,51 +65,21 @@ module.exports = gql`
     tags: [Tag]
   }
 
+  input SignUpInput {
+    fullname: String!
+    email: String!
+    password: String!
+  }
+
+  input LoginInput {
+    email: String!
+    password: String!
+  }
+
   type Mutation {
-    addItem: Boolean
+    signup(user: SignUpInput!): AuthPayload!
+    login(user: LoginInput!): AuthPayload!
+    logout: Boolean!
+    addItem(item: NewItemInput!): Item
   }
 `;
-
-// Define your schema!
-
-// The Item type has the following fields:
-
-// id (its type is ID and it's required)
-// title (its type String and it's required)
-// imageurl (its type is String)
-// description (its type String and it's required)
-// itemowner (its type is User and it's required)
-// tags (its type is a list of Tags)
-// created (its type is the custom Date scalar and it's required)
-// borrower (its type is User)
-// The User type has the following fields:
-
-// id (its type is ID and it's required)
-// email (its type is String and it's required)
-// fullname (its type is String and it's required)
-// bio (its type is String)
-// items (its type is a list of Items)
-// borrowed (its type is a list of Items)
-// The Tag type has the following fields:
-
-// id (its type is ID and it's required)
-// title (its type is String and it's required)
-// The AuthPayload type has the following fields:
-
-// token (its type is String)
-// user (its type is User)
-// The AssignedTag input has the following fields:
-
-// id (its type is ID and it's required)
-// title (its type is String and it's required)
-// The AssignedBorrower input has the following fields:
-
-// id (its type is ID and it's required)
-// The NewItemInput input has the following fields:
-
-// title (its type is String and it's required)
-// description (its type is String)
-// tags (its type is a list of AssignedTags and it's required)
-// The addItem mutation has the following variables and returns an Item:
-
-// item (its type is NewItemInput and it's required)
