@@ -62,6 +62,7 @@ module.exports = postgres => {
        */
 
       const findUserQuery = {
+        // dont return password for security
         text: `SELECT id, fullname, email, bio FROM users WHERE id=$1`, // Basic queries
         values: [id]
       };
@@ -161,7 +162,6 @@ module.exports = postgres => {
         /**
          * Begin transaction by opening a long-lived connection
          * to a client from the client pool.
-         * - Read about transactions here: https://node-postgres.com/features/transactions
          */
         postgres.connect((err, client, done) => {
           try {

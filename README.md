@@ -1,39 +1,28 @@
-# Boomtown 🏙
+## Boomtown 🏙
 
-## Server
+My first project for the app dev program at RED Academy using JavaScript, PostgreSQL, Node.js, GraphQL, Apollo Servers.
 
-Commands must be run from the `server` directory:
+### Technologies Used:
+
+JavaScript, PostgreSQL, Node.js, GraphQL, Apollo Server, Express
 
 ### Installation
 
 ```bash
-yarn install
+npm install -y
 ```
 
 ### Run
 
 ```bash
-yarn run start:dev
+npm run start:dev
 ```
 
-## Client
+<img src="./_preview/Boomtown_Data_Model.jpg">
 
-Commands must be run from the `client` directory:
+Personal Learnings
 
-### Installation
-
-```bash
-yarn install
-```
-
-### Run
-
-```bash
-yarn start
-```
-
-### Build
-
-```bash
-yarn run build
-```
+- Create a database model using draw.io
+- Build the database schema using PostgreSQL and perform CRUD operations on it
+- Test and write queries in Javascript to retrieve data from our psql database
+- Build an API with GraphQL and Apollo Server to serve the requested data to client applications
