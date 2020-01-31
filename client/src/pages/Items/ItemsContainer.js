@@ -1,21 +1,22 @@
 import React, { Component } from "react";
 import Items from "./Items";
-// import FullScreenLoader from "../../components/FullScreenLoader";
 import { Query } from "react-apollo";
 import { ALL_ITEMS_QUERY } from "../../apollo/queries";
+// import FullScreenLoader from "../../components/FullScreenLoader";
+// import { ViewerContext } from "../../context/ViewerProvider";
 
 class ItemsContainer extends Component {
+  constructor(props) {
+    super(props);
+  }
   render() {
     return (
       <Query query={ALL_ITEMS_QUERY} variables={{ filter: 1 }}>
         {({ loading, error, data }) => {
           // if (loading) return <FullScreenLoader/>;
-          if (loading) console.log(loading);
+          if (loading) return "Loading...";
           if (error) return `Error: ${error.message}`;
-          if (data) {
-            console.log(data);
-            return <Items items={data.items} />;
-          }
+          return <Items items={data.items} />;
         }}
       </Query>
     );

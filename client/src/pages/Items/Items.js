@@ -1,14 +1,14 @@
-import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import styles from './styles';
+import React from "react";
+import { withStyles } from "@material-ui/core/styles";
+import ItemsGrid from "../../components/ItemsGrid";
+import { Container } from "@material-ui/core";
+import styles from "./styles";
 
-const Items = ({ classes }) => {
+const Items = ({ items, classes }) => {
   return (
-    <div>
-      <p>
-        This is the items page located at <code>/items</code>.
-      </p>
-    </div>
+    <Container>
+      <ItemsGrid items={items} />
+    </Container>
   );
 };
 

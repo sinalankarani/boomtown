@@ -59,6 +59,7 @@ module.exports = postgres => {
         text: `SELECT * FROM items WHERE ownerid != $1`,
         values: idToOmit ? [idToOmit] : []
       });
+
       return items.rows;
     },
     async getItemsForUser(id) {
