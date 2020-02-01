@@ -55,32 +55,47 @@ module.exports = postgres => {
       }
     },
     async getItems(idToOmit) {
-      const items = await postgres.query({
-        text: `SELECT * FROM items WHERE ownerid != $1`,
-        values: idToOmit ? [idToOmit] : []
-      });
-
-      return items.rows;
+      try {
+        const items = await postgres.query({
+          text: `SELECT * FROM items WHERE ownerid != $1`,
+          values: idToOmit ? [idToOmit] : []
+        });
+        return items.rows;
+      } catch (e) {
+        throw "Items are not found";
+      }
     },
     async getItemsForUser(id) {
-      const items = await postgres.query({
-        text: `SELECT * FROM items WHERE ownerid=$1`,
-        values: [id]
-      });
-      return items.rows;
+      try {
+        const items = await postgres.query({
+          text: `SELECT * FROM items WHERE ownerid=$1`,
+          values: [id]
+        });
+        return items.rows;
+      } catch (e) {
+        throw "Items are not found";
+      }
     },
     async getBorrowedItemsForUser(id) {
-      const items = await postgres.query({
-        text: `SELECT * FROM items WHERE borrowerid = $1`,
-        values: [id]
-      });
-      return items.rows;
+      try {
+        const items = await postgres.query({
+          text: `SELECT * FROM items WHERE borrowerid = $1`,
+          values: [id]
+        });
+        return items.rows;
+      } catch (e) {
+        throw "Items are not found";
+      }
     },
     async getTags() {
-      const tags = await postgres.query({
-        text: `SELECT * FROM tags`
-      });
-      return tags.rows;
+      try {
+        const tags = await postgres.query({
+          text: `SELECT * FROM tags`
+        });
+        return tags.rows;
+      } catch (e) {
+        throw "Tags are not found";
+      }
     },
     async getTagsForItem(id) {
       const tagsQuery = {
@@ -91,8 +106,12 @@ module.exports = postgres => {
         `,
         values: [id]
       };
-      const tags = await postgres.query(tagsQuery);
-      return tags.rows;
+      try {
+        const tags = await postgres.query(tagsQuery);
+        return tags.rows;
+      } catch (e) {
+        throw e;
+      }
     },
     async saveNewItem({ item, user }) {
       return new Promise((resolve, reject) => {

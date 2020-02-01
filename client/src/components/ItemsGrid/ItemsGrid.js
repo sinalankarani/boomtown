@@ -1,43 +1,33 @@
 import React from "react";
 import ItemCard from "../../components/ItemCard";
 import { Grid } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import FormLabel from "@material-ui/core/FormLabel";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import Radio from "@material-ui/core/Radio";
-import Paper from "@material-ui/core/Paper";
+import { withStyles, makeStyles } from "@material-ui/core/styles";
+import styles from "./styles";
 
 // import { ViewerContext } from "../../context/ViewerProvider";
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1
-  },
-  paper: {
-    height: 140,
-    width: 100
-  },
-  control: {
-    padding: theme.spacing(2)
-  }
-}));
-
-const ItemsGrid = ({ items }) => {
-  const classes = useStyles();
-
-  {
-    return items.map(item => (
-      <Grid key={item.id} item xs={12} container justify="center" spacing={5}>
-        <ItemCard
-          key={item.id}
-          title={item.title}
-          description={item.description}
-          // className={classes.paper}
-        />
+const ItemsGrid = ({ items, tags, classes }) => {
+  return (
+    <Grid item xs={12}>
+      <Grid
+        container
+        justify="space-evenly"
+        spacing={4}
+        className={classes.itemGrid}
+      >
+        {items.map(item => (
+          <Grid item key={item.id}>
+            <ItemCard
+              key={item.id}
+              title={item.title}
+              description={item.description}
+              tags={item.tags}
+            />
+          </Grid>
+        ))}
       </Grid>
-    ));
-  }
+    </Grid>
+  );
 };
 
-export default ItemsGrid;
+export default withStyles(styles)(ItemsGrid);
