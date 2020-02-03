@@ -22,6 +22,7 @@ const ItemsGrid = ({ items, tags, classes }) => {
               title={item.title}
               description={item.description}
               tags={item.tags}
+              itemowner={item.itemowner}
             />
           </Grid>
         ))}
