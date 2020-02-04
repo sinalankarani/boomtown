@@ -1,4 +1,3 @@
-import { createStyles } from "@material-ui/core";
 import { fade } from "@material-ui/core/styles/colorManipulator";
 
 const styles = theme => {
