@@ -20,12 +20,9 @@ import { Form, Field } from "react-final-form";
 // };
 
 class ShareItemForm extends Component {
-  onSubmit = values => {
-    console.log(values);
-  };
+  onSubmit = values => {};
   validate = values => {
     const errors = {};
-    console.log(values);
   };
 
   render() {
