@@ -8,15 +8,14 @@ import FullScreenLoader from "../../components/FullScreenLoader";
 
 class ProfileContainer extends Component {
   render() {
-    const { props } = this.props;
-    console.log(props);
+    const { match } = this.props;
     return (
       <ViewerContext.Consumer>
         {({ viewer }) => (
           <Query
             query={ALL_USER_ITEMS_QUERY}
             variables={{
-              filter: viewer.id
+              id: match.params.id || viewer.id
             }}
           >
             {({ loading, error, data }) => {

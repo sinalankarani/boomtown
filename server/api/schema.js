@@ -45,6 +45,7 @@ module.exports = gql`
   input NewItemInput {
     title: String!
     description: String
+    imageurl: String
     tags: [AssignedTag]!
   }
 

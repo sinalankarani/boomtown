@@ -17,7 +17,6 @@ import FullScreenLoader from "../components/FullScreenLoader";
 export default () => (
   <ViewerContext.Consumer>
     {({ viewer, loading }) => {
-      // console.log(viewer);
       if (loading) return <FullScreenLoader />;
       if (!viewer) {
         return (

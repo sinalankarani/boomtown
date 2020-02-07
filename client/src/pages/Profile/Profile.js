@@ -18,16 +18,19 @@ const Profile = ({ userData, classes }) => {
         />
         <div className={classes.userName}>{userData.fullname}</div>
 
-        <div className={classes.userData}></div>
-        <div className={classes.bold}>
-          {userData.items.length} Items shared
-          <div className={classes.bold}>
-            {userData.borrowed.length} Items borrowed
+        <div className={classes.userData}>
+          <div className={classes.itemDetails}>
+            <div className={classes.bold}>{userData.items.length}</div>Items
+            shared
           </div>
-        </div>
-
-        <div className={classes.usersBio}>
-          {userData.bio ? userData.bio : null}
+          <div className={classes.itemDetails}>
+            <div className={classes.bold}>{userData.borrowed.length}</div>Items
+            borrowed
+          </div>
+          <div className={classes.usersBio}>
+            Bio:
+            {userData.bio ? userData.bio : null}
+          </div>
         </div>
       </div>
       <h1 className={classes.sharedItemsTitle}>Shared Items</h1>

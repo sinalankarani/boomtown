@@ -147,6 +147,7 @@ export default compose(
   graphql(
     SIGNUP_MUTATION,
     {
+      options: { refetchQueries },
       name: "signupMutation"
     },
     refetchQueries
@@ -154,6 +155,7 @@ export default compose(
   graphql(
     LOGIN_MUTATION,
     {
+      options: { refetchQueries },
       name: "loginMutation"
     },
     refetchQueries

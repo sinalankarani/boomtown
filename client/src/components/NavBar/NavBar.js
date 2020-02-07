@@ -3,7 +3,6 @@ import {
   AppBar,
   Button,
   IconButton,
-  Link,
   Menu,
   MenuItem,
   Toolbar,
@@ -11,12 +10,17 @@ import {
 } from "@material-ui/core/";
 import logo from "../../images/boomtown.svg";
 import { Add, MoreVert } from "@material-ui/icons/";
-import { withRouter } from "react-router-dom";
+import FingerprintIcon from "@material-ui/icons/Fingerprint";
+import PowerSettingsNewIcon from "@material-ui/icons/PowerSettingsNew";
+import { withRouter, NavLink, Link } from "react-router-dom";
+import { compose, graphql } from "react-apollo";
+import { LOGOUT_MUTATION, VIEWER_QUERY } from "../../apollo/queries";
 import styles from "./styles";
 
-const options = ["Profile", "Sign"];
+// const profile = ["Profile"];
+// const signout = ["Sign Out"];
 
-const NavBar = ({ classes, location }) => {
+const NavBar = ({ classes, location, signOut }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
@@ -32,19 +36,21 @@ const NavBar = ({ classes, location }) => {
     <div>
       <AppBar position="fixed">
         <Toolbar className={classes.navBar}>
-          <Link href="/home">
+          <NavLink to="/home">
             <img src={logo} className={classes.logo} />
-          </Link>
+          </NavLink>
           <div>
             {location.pathname !== "/share" ? (
-              <Button
-                size="large"
-                color="secondary"
-                className={classes.navButton}
-              >
-                <Add className={classes.addIcon} />
-                Share Something
-              </Button>
+              <NavLink to="/share">
+                <Button
+                  size="large"
+                  color="secondary"
+                  className={classes.navButton}
+                >
+                  <Add className={classes.addIcon} />
+                  Share Something
+                </Button>
+              </NavLink>
             ) : null}
             <IconButton
               aria-label="more"
@@ -66,15 +72,23 @@ const NavBar = ({ classes, location }) => {
                 }
               }}
             >
-              {options.map(option => (
-                <MenuItem
-                  key={option}
-                  selected={option === "Pyxis"}
-                  onClick={handleClose}
-                >
-                  {option}
+              <NavLink to="/profile">
+                <MenuItem onClick={handleClose}>
+                  <FingerprintIcon />
+                  Your Profile
                 </MenuItem>
-              ))}
+              </NavLink>
+              <MenuItem
+                onClick={() => {
+                  handleClose();
+                  try {
+                    signOut();
+                  } catch (e) {}
+                }}
+              >
+                <PowerSettingsNewIcon />
+                Sign Out
+              </MenuItem>
             </Menu>
           </div>
         </Toolbar>
@@ -83,4 +97,11 @@ const NavBar = ({ classes, location }) => {
   );
 };
 
-export default withRouter(withStyles(styles)(NavBar));
+const refetchQueries = [{ query: VIEWER_QUERY }];
+
+export default compose(
+  graphql(LOGOUT_MUTATION, {
+    options: { refetchQueries },
+    name: "signOut"
+  })
+)(withRouter(withStyles(styles)(NavBar)));

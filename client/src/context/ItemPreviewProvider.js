@@ -20,10 +20,9 @@ const ItemPreviewProvider = props => {
   };
 
   const updatePreview = itemInput => {
-    const newItem = { item: { ...item, ...itemInput } };
+    const newItem = { ...item, ...itemInput };
     setItem(newItem);
   };
-  // console.log(item);
 
   return (
     <ItemPreviewContext.Provider
