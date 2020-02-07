@@ -6,9 +6,9 @@ import styles from "./styles";
 
 // import { ViewerContext } from "../../context/ViewerProvider";
 
-const ItemsGrid = ({ items, tags, classes }) => {
+const ItemsGrid = ({ items, classes }) => {
   return (
-    <Grid item xs={12}>
+    <Grid item>
       <Grid
         container
         justify="space-evenly"
@@ -17,13 +17,7 @@ const ItemsGrid = ({ items, tags, classes }) => {
       >
         {items.map(item => (
           <Grid item key={item.id}>
-            <ItemCard
-              key={item.id}
-              title={item.title}
-              description={item.description}
-              tags={item.tags}
-              itemowner={item.itemowner}
-            />
+            <ItemCard item={item} xs={12} md={6} lg={4} />
           </Grid>
         ))}
       </Grid>

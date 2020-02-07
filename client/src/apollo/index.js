@@ -8,7 +8,7 @@ const httpLink = createHttpLink({
   includeExtensions: true,
   uri: process.env.NODE_ENV !== "production" && "http://localhost:8080/graphql",
   // -------------------------------
-  credentials: process.env.NODE_ENV === "production" ? "same-origin" : ""
+  credentials: process.env.NODE_ENV === "production" ? "same-origin" : "include"
 });
 
 const client = new ApolloClient({

@@ -1,13 +1,18 @@
 import React from "react";
+import { ItemPreviewContext } from "../../context/ItemPreviewProvider";
+import ItemCard from ".././ItemCard";
 import { withStyles } from "@material-ui/core/styles";
-import { Box } from "@material-ui/core";
 import styles from "./styles";
 
 const ShareItemPreview = ({ classes }) => {
   return (
-    <div className={classes.itemPreviewContainer}>
-      <Box style={{ height: 500, width: 500, backgroundColor: "lightblue" }} />
-    </div>
+    <ItemPreviewContext.Consumer>
+      {({ state }) => (
+        <div className={classes.itemPreviewContainer}>
+          <ItemCard item={state.item} />
+        </div>
+      )}
+    </ItemPreviewContext.Consumer>
   );
 };
 

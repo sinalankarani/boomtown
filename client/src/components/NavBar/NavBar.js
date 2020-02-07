@@ -28,7 +28,6 @@ const NavBar = ({ classes, location }) => {
     setAnchorEl(null);
   };
 
-  console.log(location);
   return (
     <div>
       <AppBar position="fixed">

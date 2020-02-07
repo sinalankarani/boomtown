@@ -3,10 +3,15 @@ import {
   withStyles,
   Checkbox,
   TextField,
-  Typography
+  Typography,
+  Button
 } from "@material-ui/core/";
+import HomeIcon from "@material-ui/icons/Home";
+import { Form, Field, FormSpy } from "react-final-form";
+import { ItemPreviewContext } from "../../context/ItemPreviewProvider";
+import { Mutation } from "react-apollo";
+import { ADD_ITEM_MUTATION } from "../../apollo/queries";
 import styles from "./styles";
-import { Form, Field } from "react-final-form";
 
 // const [state, setState] = React.useState({
 //   checkedA: true,
@@ -20,49 +25,162 @@ import { Form, Field } from "react-final-form";
 // };
 
 class ShareItemForm extends Component {
-  onSubmit = values => {};
-  validate = values => {
-    const errors = {};
+  applyTags = (tags, allTags) => {
+    return tags.map(tag => {
+      const updatedTag = { title: tag };
+      allTags.filter(t => {
+        if (t.title === tag) {
+          updatedTag.id = t.id;
+        }
+      });
+      return updatedTag;
+    });
+  };
+
+  dispatchUpdate = (values, allTags, updatePreview) => {
+    updatePreview({
+      ...values,
+      tags: this.applyTags(values.tags || [], allTags)
+    });
   };
 
   render() {
-    console.log(this.props);
-    const { classes } = this.props;
-    const { tags } = this.props;
+    const { classes, tags } = this.props;
+
     return (
-      <Form
-        onSubmit={this.onSubmit}
-        validate={this.validate}
-        render={({ handleSubmit }) => {
-          return (
-            <form onSubmit={handleSubmit} className={classes.formContainer}>
-              <Typography gutterBottom variant="h3">
-                Share. Borrow. Prosper.
-              </Typography>
-              <Field
-                name="item name"
-                type="text"
-                render={({ input, meta }) => (
-                  <React.Fragment>
-                    <TextField {...input} placeholder="Name your item." />
-                    {meta.error && meta.touched && <span>{meta.error}</span>}
-                  </React.Fragment>
-                )}
-              />
-              <Field
-                gutterBottom
-                name="item description"
-                type="text"
-                render={({ input, meta }) => (
-                  <React.Fragment>
-                    <TextField {...input} placeholder="Describe your item." />
-                    {meta.error && meta.touched && <span>{meta.error}</span>}
-                  </React.Fragment>
-                )}
-              />
-              <Typography variant="h6">Add Your Tags:</Typography>
-              <div className={classes.tagsCheckbox}>
-                {tags.map(tag => {
+      <Mutation mutation={ADD_ITEM_MUTATION}>
+        {addItem => (
+          <ItemPreviewContext.Consumer>
+            {({ updatePreview, resetPreview }) => (
+              <Form
+                onSubmit={async values => {
+                  try {
+                    await addItem({
+                      variables: {
+                        item: {
+                          ...values,
+                          tags: this.applyTags(values.tags, tags)
+                        }
+                      }
+                    });
+                  } catch (e) {
+                    throw e;
+                  }
+                }}
+                validate={this.validate}
+                render={({ handleSubmit, pristine }) => {
+                  return (
+                    <form
+                      className={classes.formContainer}
+                      onSubmit={event => {
+                        handleSubmit(event);
+                        resetPreview();
+                      }}
+                    >
+                      <FormSpy
+                        subscription={{ values: true }}
+                        onChange={({ values }) => {
+                          if (values) {
+                            this.dispatchUpdate(values, tags, updatePreview);
+                          }
+                          return "";
+                        }}
+                      />
+                      <Typography gutterBottom variant="h3">
+                        Share. Borrow. Prosper.
+                      </Typography>
+                      <Field
+                        name="title"
+                        type="text"
+                        render={({ input, meta }) => (
+                          <React.Fragment>
+                            <TextField
+                              {...input}
+                              placeholder="Name your item."
+                            />
+                            {meta.error && meta.touched && (
+                              <span>{meta.error}</span>
+                            )}
+                          </React.Fragment>
+                        )}
+                      />
+                      <Field
+                        gutterBottom
+                        name="description"
+                        type="text"
+                        render={({ input, meta }) => (
+                          <React.Fragment>
+                            <TextField
+                              {...input}
+                              placeholder="Describe your item."
+                            />
+                            {meta.error && meta.touched && (
+                              <span>{meta.error}</span>
+                            )}
+                          </React.Fragment>
+                        )}
+                      />
+                      <Typography variant="h6">Add Your Tags:</Typography>
+                      <div className={classes.tagsCheckbox}>
+                        <label className={classes.tagIcons}>
+                          <Field
+                            name="tags"
+                            component="input"
+                            type="checkbox"
+                            value="Household Items"
+                          />
+                          Household Items
+                          <HomeIcon />
+                        </label>
+                        <label className={classes.tagIcons}>
+                          <Field
+                            name="tags"
+                            component="input"
+                            type="checkbox"
+                            value="Tools"
+                          />
+                          Tools
+                          <HomeIcon />
+                        </label>
+                        <label className={classes.tagIcons}>
+                          <Field
+                            name="tags"
+                            component="input"
+                            type="checkbox"
+                            value="Electronics"
+                          />
+                          Electronics
+                          <HomeIcon />
+                        </label>
+                        <label className={classes.tagIcons}>
+                          <Field
+                            name="tags"
+                            component="input"
+                            type="checkbox"
+                            value="Musical Instruments"
+                          />
+                          Musical Instruments
+                          <HomeIcon />
+                        </label>
+                        <label className={classes.tagIcons}>
+                          <Field
+                            name="tags"
+                            component="input"
+                            type="checkbox"
+                            value="Clothing"
+                          />
+                          Clothing
+                          <HomeIcon />
+                        </label>
+                        <Button
+                          type="submit"
+                          color="primary"
+                          variant="contained"
+                          disabled={pristine}
+                        >
+                          Submit
+                        </Button>
+                        {/* {tags.map(tag => {
                   return (
                     <label key={tag.id}>
                       <Checkbox
@@ -74,12 +192,16 @@ class ShareItemForm extends Component {
                       {tag.title}
                     </label>
                   );
-                })}
-              </div>
-            </form>
-          );
-        }}
-      ></Form>
+                })} */}
+                      </div>
+                    </form>
+                  );
+                }}
+              ></Form>
+            )}
+          </ItemPreviewContext.Consumer>
+        )}
+      </Mutation>
     );
   }
 }

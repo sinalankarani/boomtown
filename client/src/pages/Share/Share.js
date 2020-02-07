@@ -15,7 +15,6 @@ import styles from "./styles";
   Hint: It should look like any other Item card.
 
 */
-// import ShareItemPreview from '../../components/ShareItemPreview';
 
 const Share = ({ classes, tags }) => {
   return (

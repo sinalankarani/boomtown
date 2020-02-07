@@ -1,13 +1,34 @@
-import React, { Component } from 'react';
-import Profile from './Profile';
-// import FullScreenLoader from '../../components/FullScreenLoader';
-// import { Query } from 'react-apollo';
-// import {  } from '../../apollo/queries';
+import React, { Component } from "react";
+import Profile from "./Profile";
+import { Query } from "react-apollo";
+import { ALL_USER_ITEMS_QUERY } from "../../apollo/queries";
+import { withRouter } from "react-router";
+import { ViewerContext } from "../../context/ViewerProvider";
+import FullScreenLoader from "../../components/FullScreenLoader";
 
 class ProfileContainer extends Component {
   render() {
-    return <Profile />;
+    const { props } = this.props;
+    console.log(props);
+    return (
+      <ViewerContext.Consumer>
+        {({ viewer }) => (
+          <Query
+            query={ALL_USER_ITEMS_QUERY}
+            variables={{
+              filter: viewer.id
+            }}
+          >
+            {({ loading, error, data }) => {
+              if (loading) return <FullScreenLoader />;
+              if (error) return `Error: ${error}`;
+              if (data) return <Profile userData={data.user} />;
+            }}
+          </Query>
+        )}
+      </ViewerContext.Consumer>
+    );
   }
 }
 
-export default ProfileContainer;
+export default withRouter(ProfileContainer);
