@@ -7,7 +7,7 @@ const styles = theme => {
       height: 450
     },
     media: {
-      backgroundImage: `url(https://images.unsplash.com/photo-1560849807-bae5314c9e98?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2800&q=80)`,
+      // backgroundImage: `url(https://images.unsplash.com/photo-1560849807-bae5314c9e98?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2800&q=80)`,
       height: "100%",
       backgroundSize: "cover",
       backgroundPosition: "center",

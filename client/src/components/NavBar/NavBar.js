@@ -12,13 +12,10 @@ import logo from "../../images/boomtown.svg";
 import { Add, MoreVert } from "@material-ui/icons/";
 import FingerprintIcon from "@material-ui/icons/Fingerprint";
 import PowerSettingsNewIcon from "@material-ui/icons/PowerSettingsNew";
-import { withRouter, NavLink, Link } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import { compose, graphql } from "react-apollo";
 import { LOGOUT_MUTATION, VIEWER_QUERY } from "../../apollo/queries";
 import styles from "./styles";
-
-// const profile = ["Profile"];
-// const signout = ["Sign Out"];
 
 const NavBar = ({ classes, location, signOut }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -36,12 +33,12 @@ const NavBar = ({ classes, location, signOut }) => {
     <div>
       <AppBar position="fixed">
         <Toolbar className={classes.navBar}>
-          <NavLink to="/home">
+          <Link to="/home">
             <img src={logo} className={classes.logo} />
-          </NavLink>
+          </Link>
           <div>
             {location.pathname !== "/share" ? (
-              <NavLink to="/share">
+              <Link to="/share">
                 <Button
                   size="large"
                   color="secondary"
@@ -50,7 +47,7 @@ const NavBar = ({ classes, location, signOut }) => {
                   <Add className={classes.addIcon} />
                   Share Something
                 </Button>
-              </NavLink>
+              </Link>
             ) : null}
             <IconButton
               aria-label="more"
@@ -72,12 +69,12 @@ const NavBar = ({ classes, location, signOut }) => {
                 }
               }}
             >
-              <NavLink to="/profile">
+              <Link to="/profile">
                 <MenuItem onClick={handleClose}>
                   <FingerprintIcon />
                   Your Profile
                 </MenuItem>
-              </NavLink>
+              </Link>
               <MenuItem
                 onClick={() => {
                   handleClose();

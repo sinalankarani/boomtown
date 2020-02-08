@@ -8,14 +8,12 @@ import React, { Component } from "react";
 import Typography from "@material-ui/core/Typography";
 import validate from "./helpers/validation";
 import { Form, Field } from "react-final-form";
-
 import {
   LOGIN_MUTATION,
   SIGNUP_MUTATION,
   VIEWER_QUERY
 } from "../../apollo/queries";
 import { graphql, compose } from "react-apollo";
-
 import styles from "./styles";
 
 class AccountForm extends Component {
@@ -91,6 +89,7 @@ class AccountForm extends Component {
                 )}
               </Field>
             </FormControl>
+
             <FormControl className={classes.formControl}>
               <Grid
                 container
@@ -126,6 +125,7 @@ class AccountForm extends Component {
                 </Typography>
               </Grid>
             </FormControl>
+
             <Typography className={classes.errorMessage}>
               {(this.state.error &&
                 this.state.formToggle &&

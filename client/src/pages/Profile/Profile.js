@@ -16,7 +16,7 @@ const Profile = ({ userData, classes }) => {
           default="monsterid"
           style={{ borderRadius: 50, marginRight: 20 }}
         />
-        <div className={classes.userName}>{userData.fullname}</div>
+        <div className={classes.bold}>{userData.fullname}</div>
 
         <div className={classes.userData}>
           <div className={classes.itemDetails}>
@@ -27,8 +27,8 @@ const Profile = ({ userData, classes }) => {
             <div className={classes.bold}>{userData.borrowed.length}</div>Items
             borrowed
           </div>
-          <div className={classes.usersBio}>
-            Bio:
+          <div className={classes.itemDetails}>
+            <div className={classes.bold}>Bio:</div>
             {userData.bio ? userData.bio : null}
           </div>
         </div>

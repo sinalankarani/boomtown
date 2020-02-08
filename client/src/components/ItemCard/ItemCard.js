@@ -9,16 +9,15 @@ import {
   Typography
 } from "@material-ui/core";
 import moment from "moment";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import Gravatar from "react-gravatar";
 import styles from "./styles";
-// import { ViewerContext } from "../../context/ViewerProvider";
 
-const ItemCard = ({ classes, item }) => {
+const ItemCard = ({ classes, item, location }) => {
   return (
     <Card className={classes.card}>
-      <NavLink to={`profile/${item.itemowner.id}`}>
+      <Link to={item && item.itemowner.id && `/profile/${item.itemowner.id}`}>
         <CardMedia
           className={classes.media}
           style={{ backgroundImage: item && item.imageurl }}
@@ -55,7 +54,7 @@ const ItemCard = ({ classes, item }) => {
             </CardActions>
           </CardContent>
         </CardMedia>
-      </NavLink>
+      </Link>
     </Card>
   );
 };

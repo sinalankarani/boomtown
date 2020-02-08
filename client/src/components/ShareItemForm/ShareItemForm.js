@@ -120,6 +120,19 @@ class ShareItemForm extends Component {
                           </React.Fragment>
                         )}
                       />
+                      <Field
+                        gutterBottom
+                        name="imageurl"
+                        type="text"
+                        render={({ input, meta }) => (
+                          <React.Fragment>
+                            <TextField {...input} placeholder="Image URL." />
+                            {meta.error && meta.touched && (
+                              <span>{meta.error}</span>
+                            )}
+                          </React.Fragment>
+                        )}
+                      />
                       <Typography variant="h6">Add Your Tags:</Typography>
                       <div className={classes.tagsCheckbox}>
                         <label className={classes.tagIcons}>
