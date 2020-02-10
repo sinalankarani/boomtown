@@ -13,7 +13,7 @@ import Gravatar from "react-gravatar";
 import PropTypes from "prop-types";
 import styles from "./styles";
 
-const ItemCard = ({ classes, item, location }) => {
+const ItemCard = ({ classes, item }) => {
   return (
     <Card className={classes.card}>
       <Link to={item && item.itemowner.id && `/profile/${item.itemowner.id}`}>

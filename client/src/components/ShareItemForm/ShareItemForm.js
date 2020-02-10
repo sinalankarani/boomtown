@@ -1,28 +1,11 @@
 import React, { Component } from "react";
-import {
-  withStyles,
-  Checkbox,
-  TextField,
-  Typography,
-  Button
-} from "@material-ui/core/";
-import HomeIcon from "@material-ui/icons/Home";
+import { withStyles, TextField, Typography, Button } from "@material-ui/core/";
 import { Form, Field, FormSpy } from "react-final-form";
 import { ItemPreviewContext } from "../../context/ItemPreviewProvider";
 import { Mutation } from "react-apollo";
 import { ADD_ITEM_MUTATION } from "../../apollo/queries";
+import PropTypes from "prop-types";
 import styles from "./styles";
-
-// const [state, setState] = React.useState({
-//   checkedA: true,
-//   checkedB: true,
-//   checkedF: true,
-//   checkedG: true
-// });
-
-// const handleChange = name => event => {
-//   setState({ ...state, [name]: event.target.checked });
-// };
 
 class ShareItemForm extends Component {
   applyTags = (tags, allTags) => {
@@ -188,19 +171,6 @@ class ShareItemForm extends Component {
                         >
                           Submit
                         </Button>
-                        {/* {tags.map(tag => {
-                  return (
-                    <label key={tag.id}>
-                      <Checkbox
-                        // checked={state.checkedB}
-                        // onChange={handleChange("checkedB")}
-                        value={tag.title}
-                        color="primary"
-                      />
-                      {tag.title}
-                    </label>
-                  );
-                })} */}
                       </div>
                     </form>
                   );
@@ -213,5 +183,9 @@ class ShareItemForm extends Component {
     );
   }
 }
+
+ShareItemForm.propTypes = {
+  tags: PropTypes.array.isRequired
+};
 
 export default withStyles(styles)(ShareItemForm);
