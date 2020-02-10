@@ -13,7 +13,7 @@ class ShareItemForm extends Component {
       const updatedTag = { title: tag };
       allTags.filter(t => {
         if (t.title === tag) {
-          updatedTag.id = t.id;
+          updatedTag.id = t.id + ", ";
         }
       });
       return updatedTag;
@@ -47,7 +47,9 @@ class ShareItemForm extends Component {
                       }
                     });
                   } catch (e) {
-                    throw e;
+                    throw new Error(
+                      `An error occured with your item details  + ${e}`
+                    );
                   }
                 }}
                 validate={this.validate}
