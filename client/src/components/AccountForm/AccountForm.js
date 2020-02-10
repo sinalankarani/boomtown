@@ -28,6 +28,7 @@ class AccountForm extends Component {
 
   render() {
     const { classes, loginMutation, signupMutation } = this.props;
+    const error = this.state.error;
 
     return (
       <Form
@@ -36,6 +37,7 @@ class AccountForm extends Component {
           this.state.formToggle
             ? loginMutation(user).catch(error => this.setState({ error }))
             : signupMutation(user).catch(error => this.setState({ error }));
+          this.setState({ error: null });
         }}
         validate={validate.bind(this)}
         render={({ handleSubmit, pristine, invalid, submitting, form }) => (
@@ -45,15 +47,18 @@ class AccountForm extends Component {
                 <InputLabel htmlFor="fullname">Username</InputLabel>
                 <Field name="fullname">
                   {({ input, meta }) => (
-                    <Input
-                      id="fullname"
-                      type="text"
-                      inputProps={{
-                        ...input,
-                        autoComplete: "off"
-                      }}
-                      value={input.value}
-                    />
+                    <React.Fragment>
+                      <Input
+                        id="fullname"
+                        type="text"
+                        inputProps={{
+                          ...input,
+                          autoComplete: "off"
+                        }}
+                        value={input.value}
+                      />
+                      {meta.error && meta.touched && <span>{meta.error}</span>}
+                    </React.Fragment>
                   )}
                 </Field>
               </FormControl>
@@ -62,15 +67,18 @@ class AccountForm extends Component {
               <InputLabel htmlFor="email">Email</InputLabel>
               <Field name="email">
                 {({ input, meta }) => (
-                  <Input
-                    id="email"
-                    type="text"
-                    inputProps={{
-                      ...input,
-                      autoComplete: "off"
-                    }}
-                    value={input.value}
-                  />
+                  <React.Fragment>
+                    <Input
+                      id="email"
+                      type="text"
+                      inputProps={{
+                        ...input,
+                        autoComplete: "off"
+                      }}
+                      value={input.value}
+                    />
+                    {meta.error && meta.touched && <span>{meta.error}</span>}
+                  </React.Fragment>
                 )}
               </Field>
             </FormControl>
@@ -78,15 +86,18 @@ class AccountForm extends Component {
               <InputLabel htmlFor="password">Password</InputLabel>
               <Field name="password" type="password">
                 {({ input, meta }) => (
-                  <Input
-                    id="password"
-                    type="password"
-                    inputProps={{
-                      ...input,
-                      autoComplete: "off"
-                    }}
-                    value={input.value}
-                  />
+                  <React.Fragment>
+                    <Input
+                      id="password"
+                      type="password"
+                      inputProps={{
+                        ...input,
+                        autoComplete: "off"
+                      }}
+                      value={input.value}
+                    />
+                    {meta.error && meta.touched && <span>{meta.error}</span>}
+                  </React.Fragment>
                 )}
               </Field>
             </FormControl>
@@ -135,6 +146,7 @@ class AccountForm extends Component {
                   !this.state.formToggle &&
                   this.state.error.graphQLErrors.message)}
             </Typography>
+            {this.state.error && <span>Email and/or Password are invalid</span>}
           </form>
         )}
       />
