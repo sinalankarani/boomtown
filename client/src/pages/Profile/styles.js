@@ -1,14 +1,32 @@
 const styles = theme => ({
   profileContainer: {
-    padding: 100
+    padding: 100,
+    backgroundColor: theme.palette.secondary.main
+  },
+  profileInfo: {
+    backgroundColor: theme.palette.white.main,
+    minWidth: "80%",
+    height: 200,
+    borderRadius: 5,
+    padding: 30
   },
   itemDetails: {
     display: "flex",
     flexDirection: "row"
   },
+  sharedItemsTitle: {
+    color: theme.palette.primary.main
+  },
+  username: {
+    color: "grey"
+  },
   bold: {
     fontWeight: "bold",
     paddingRight: 5
+  },
+  bioItems: {
+    display: "flex",
+    justifyContent: "flex-start"
   }
 });
 
