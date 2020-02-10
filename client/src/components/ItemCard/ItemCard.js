@@ -20,41 +20,44 @@ const ItemCard = ({ classes, item, location }) => {
       <Link to={item && item.itemowner.id && `/profile/${item.itemowner.id}`}>
         <CardMedia
           className={classes.media}
+          src={
+            item && item.imageurl
+              ? item.imageurl
+              : "https://images.unsplash.com/photo-1560849807-bae5314c9e98?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2800&q=80"
+          }
           style={{ backgroundImage: item && item.imageurl }}
-        >
-          <CardContent className={classes.content}>
-            <div className={classes.itemDescription}>
-              <Typography gutterBottom variant="h5" component="h2">
-                {item && item.title}
-              </Typography>
-              <Typography gutterBottom variant="body1" component="h2">
-                {item && item.description}
-              </Typography>
-              <Typography gutterBottom variant="body2" component="h2">
-                {item && item.tags.map(tag => tag.title)}
-              </Typography>
-              <Typography variant="body1" component="h2">
-                {moment()
-                  .startOf("day")
-                  .fromNow()}
-              </Typography>
-            </div>
-            <Gravatar
-              className={classes.gravatar}
-              email={item && item.itemowner && item.itemowner.email}
-              size={50}
-              rating="pg"
-              default="monsterid"
-              style={{ borderRadius: 50, marginRight: 20 }}
-            />
-            <CardActions color="primary">
-              <Button className={classes.borrowBtn} size="medium">
-                Borrow
-              </Button>
-            </CardActions>
-          </CardContent>
-        </CardMedia>
+        ></CardMedia>
       </Link>
+      <CardContent className={classes.content}>
+        <div className={classes.itemPostBox}>
+          <Gravatar
+            className={classes.gravatar}
+            email={item && item.itemowner && item.itemowner.email}
+            size={50}
+            default="monsterid"
+          />
+          <div className={classes.itemPostInfo}>
+            <Typography variant="body2">
+              {item && item.itemowner.fullname}
+            </Typography>
+            <Typography variant="body2" color="white">
+              {moment()
+                .startOf("day")
+                .fromNow()}
+            </Typography>
+          </div>
+        </div>
+        <div className={classes.itemDescription}>
+          <Typography variant="h5">{item && item.title}</Typography>
+          <Typography variant="body1">{item && item.description}</Typography>
+          <Typography variant="body2">
+            {item && item.tags.map(tag => tag.title)}
+          </Typography>
+        </div>
+        <Button className={classes.borrowBtn} size="medium">
+          Borrow
+        </Button>
+      </CardContent>
     </Card>
   );
 };

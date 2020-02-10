@@ -1,11 +1,11 @@
-import { createStyles } from "@material-ui/core";
-
 const styles = theme => {
   return {
     itemGrid: {
       background: theme.palette.secondary.main,
-      padding: 2,
-      paddingTop: 100
+      padding: 80,
+      maxWidth: "100%",
+      margin: "0 auto",
+      display: "flex"
     }
   };
 };

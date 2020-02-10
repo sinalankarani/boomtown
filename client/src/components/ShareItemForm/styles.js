@@ -4,11 +4,12 @@ const styles = theme => {
       display: "flex",
       flexDirection: "column",
       justifyContent: "space-around",
-      height: 450
+      height: 450,
+      maxWidth: "60%"
     },
     tagsCheckbox: {
       display: "flex",
-      justifyContent: "space-around"
+      justifyContent: "space-between"
     }
   };
 };
