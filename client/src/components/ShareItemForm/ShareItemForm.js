@@ -86,7 +86,7 @@ class ShareItemForm extends Component {
                           return "";
                         }}
                       />
-                      <Typography gutterBottom variant="h3">
+                      <Typography gutterBottom variant="h4">
                         Share. Borrow. Prosper.
                       </Typography>
                       <Field
@@ -143,7 +143,6 @@ class ShareItemForm extends Component {
                             value="Household Items"
                           />
                           Household Items
-                          <HomeIcon />
                         </label>
                         <label className={classes.tagIcons}>
                           <Field
@@ -153,7 +152,6 @@ class ShareItemForm extends Component {
                             value="Tools"
                           />
                           Tools
-                          <HomeIcon />
                         </label>
                         <label className={classes.tagIcons}>
                           <Field
@@ -163,7 +161,6 @@ class ShareItemForm extends Component {
                             value="Electronics"
                           />
                           Electronics
-                          <HomeIcon />
                         </label>
                         <label className={classes.tagIcons}>
                           <Field
@@ -173,7 +170,6 @@ class ShareItemForm extends Component {
                             value="Musical Instruments"
                           />
                           Musical Instruments
-                          <HomeIcon />
                         </label>
                         <label className={classes.tagIcons}>
                           <Field
@@ -183,7 +179,6 @@ class ShareItemForm extends Component {
                             value="Clothing"
                           />
                           Clothing
-                          <HomeIcon />
                         </label>
                         <Button
                           type="submit"

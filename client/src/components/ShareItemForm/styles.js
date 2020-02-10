@@ -3,13 +3,16 @@ const styles = theme => {
     formContainer: {
       display: "flex",
       flexDirection: "column",
-      justifyContent: "space-around",
-      height: 450,
-      maxWidth: "60%"
+      justifyContent: "space-evenly",
+      height: 650,
+      minWdith: "50%"
     },
     tagsCheckbox: {
       display: "flex",
-      justifyContent: "space-between"
+      flexDirection: "column"
+    },
+    tagIcons: {
+      padding: 5
     }
   };
 };

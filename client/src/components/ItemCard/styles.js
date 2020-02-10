@@ -2,7 +2,6 @@ const styles = theme => {
   return {
     card: {
       height: 520
-      // flexGrow: 20
     },
     media: {
       backgroundImage: `url(https://images.unsplash.com/photo-1560849807-bae5314c9e98?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2800&q=80)`,

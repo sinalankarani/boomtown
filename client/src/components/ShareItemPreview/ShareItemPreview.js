@@ -9,7 +9,7 @@ const ShareItemPreview = ({ classes }) => {
     <ItemPreviewContext.Consumer>
       {({ state }) => (
         <div className={classes.itemPreviewContainer}>
-          <ItemCard item={state} />
+          <ItemCard item={state} className={classes.itemPreviewCard} />
         </div>
       )}
     </ItemPreviewContext.Consumer>

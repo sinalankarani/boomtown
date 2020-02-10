@@ -3,8 +3,8 @@ import React from "react";
 export const ItemPreviewContext = React.createContext();
 
 const initialState = {
-  title: "Dummy",
-  description: "Black",
+  title: "Test Item",
+  description: "Description goes here...",
   tags: [],
   itemowner: {},
   created: new Date(),
