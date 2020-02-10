@@ -10,6 +10,7 @@ import moment from "moment";
 import { Link } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import Gravatar from "react-gravatar";
+import PropTypes from "prop-types";
 import styles from "./styles";
 
 const ItemCard = ({ classes, item, location }) => {
@@ -58,6 +59,16 @@ const ItemCard = ({ classes, item, location }) => {
       </CardContent>
     </Card>
   );
+};
+
+ItemCard.propTypes = {
+  item: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string,
+    itemowner: PropTypes.object,
+    tags: PropTypes.array,
+    imageurl: PropTypes.string
+  })
 };
 
 export default withStyles(styles)(ItemCard);
