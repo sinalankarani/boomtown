@@ -146,7 +146,11 @@ class AccountForm extends Component {
                   !this.state.formToggle &&
                   this.state.error.graphQLErrors.message)}
             </Typography>
-            {this.state.error && <span>Email and/or Password are invalid</span>}
+            {this.state.error && (
+              <span style={{ color: "red" }}>
+                {this.state.error.graphQLErrors[0].message}
+              </span>
+            )}
           </form>
         )}
       />
