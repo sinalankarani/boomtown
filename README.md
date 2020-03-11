@@ -26,11 +26,11 @@ Client
 yarn start
 ```
 
-<img width=248 src="./_preview/sign-up.png">
-<img  width=200 src="./_preview/sign-in.png">
-<img  width=238 src="./_preview/share.png">
-<img  width=210 src="./_preview/profile.png">
-<img  width=450 src="./_preview/item-grid.png">
+<img width=720 src="./_preview/sign-up.png">
+<img  width=720 src="./_preview/sign-in.png">
+<img  width=720 src="./_preview/share.png">
+<img  width=720 src="./_preview/profile.png">
+<img  width=720 src="./_preview/item-grid.png">
 
 ## Relational Data Modelling
 
