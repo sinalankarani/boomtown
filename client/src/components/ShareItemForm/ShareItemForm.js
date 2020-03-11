@@ -13,7 +13,7 @@ class ShareItemForm extends Component {
       const updatedTag = { title: tag };
       allTags.filter(t => {
         if (t.title === tag) {
-          updatedTag.id = t.id + ", ";
+          updatedTag.title = t.title + "  ";
         }
       });
       return updatedTag;
@@ -170,6 +170,9 @@ class ShareItemForm extends Component {
                           color="primary"
                           variant="contained"
                           disabled={pristine}
+                          to={{
+                            pathname: "/profile"
+                          }}
                         >
                           Submit
                         </Button>
