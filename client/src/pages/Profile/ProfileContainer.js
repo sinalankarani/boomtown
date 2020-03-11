@@ -17,6 +17,7 @@ class ProfileContainer extends Component {
             variables={{
               id: match.params.id || viewer.id
             }}
+            fetchPolicy="network-only"
           >
             {({ loading, error, data }) => {
               if (loading) return <FullScreenLoader />;

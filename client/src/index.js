@@ -11,12 +11,6 @@ import theme from "./theme";
 import ItemPreviewProvider from "./context/ItemPreviewProvider";
 import ViewerProvider from "./context/ViewerProvider";
 
-/*
- * Below in your <App />, wrap the <ViewerProvider /> component around
- * the <BrowserRouter /> component so the router is aware of whether a
- * user is currently logged in and who that user is.
- */
-
 import "./index.css";
 
 const App = () => {
