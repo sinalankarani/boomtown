@@ -4,7 +4,7 @@ My first project for the app dev program at RED Academy using JavaScript, Postgr
 
 ### Technologies Used:
 
-JavaScript, PostgreSQL, Node.js, GraphQL, Apollo Server, Express
+JavaScript, [PostgreSQL](https://www.postgresql.org/), [Node.js](https://nodejs.org/en/), [GraphQL](https://graphql.org/), [Apollo Server](https://www.apollographql.com/docs/apollo-server/), [Express](https://expressjs.com/)
 
 ### Installation
 
@@ -14,9 +14,23 @@ npm install -y
 
 ### Run
 
+Server
+
 ```bash
 npm run start:dev
 ```
+
+Client
+
+```bash
+yarn start
+```
+
+<img width=248 src="./_preview/sign-up.png">
+<img  width=200 src="./_preview/sign-in.png">
+<img  width=238 src="./_preview/share.png">
+<img  width=210 src="./_preview/profile.png">
+<img  width=450 src="./_preview/item-grid.png">
 
 ## Relational Data Modelling
 
@@ -28,6 +42,11 @@ npm run start:dev
 - Build the database schema using PostgreSQL and perform CRUD operations on it
 - Test and write queries in Javascript to retrieve data from our psql database
 - Build an API with GraphQL and Apollo Server to serve the requested data to the client applications
+- Importing and exporting files through JavaScript
+- Use React's Context API for state management
+- Use propTypes to document all component props
+- Use Apollo Client's Query and Mutation components to manage data
+- Refetch relevant GraphQL queries upon successful data mutation to keep the UI in sync
 
 ## GraphQL Mutation
 
