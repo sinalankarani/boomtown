@@ -37,6 +37,8 @@ const Profile = ({ userData, classes }) => {
       </div>
       <h1 className={classes.sharedItemsTitle}>Shared Items</h1>
       <ItemsGrid items={userData.items} className={classes.bioItems} />
+      <h1 className={classes.sharedItemsTitle}>Borrowed Items</h1>
+      <ItemsGrid items={userData.borrowed} className={classes.bioItems} />
     </div>
   );
 };

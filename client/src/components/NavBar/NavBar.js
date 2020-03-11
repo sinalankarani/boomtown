@@ -34,7 +34,7 @@ const NavBar = ({ classes, location, signOut }) => {
       <AppBar position="fixed">
         <Toolbar className={classes.navBar}>
           <Link to="/home">
-            <img src={logo} className={classes.logo} />
+            <img alt={logo} src={logo} className={classes.logo} />
           </Link>
           <div>
             {location.pathname !== "/share" ? (

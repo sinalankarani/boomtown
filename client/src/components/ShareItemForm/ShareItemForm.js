@@ -187,7 +187,9 @@ class ShareItemForm extends Component {
 }
 
 ShareItemForm.propTypes = {
-  tags: PropTypes.array.isRequired
+  tags: PropTypes.array.isRequired,
+
+  tags: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
 export default withStyles(styles)(ShareItemForm);

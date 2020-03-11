@@ -1,10 +1,5 @@
 import React, { Fragment } from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  Redirect
-} from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import Items from "../pages/Items";
 import Home from "../pages/Home";
 import Share from "../pages/Share";

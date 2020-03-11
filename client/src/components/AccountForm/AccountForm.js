@@ -139,16 +139,16 @@ class AccountForm extends Component {
             </FormControl>
 
             <Typography className={classes.errorMessage}>
-              {(this.state.error &&
+              {(error &&
                 this.state.formToggle &&
-                this.state.error.graphQLErrors.message) ||
-                (this.state.error &&
+                error.graphQLErrors.message) ||
+                (error &&
                   !this.state.formToggle &&
-                  this.state.error.graphQLErrors.message)}
+                  error.graphQLErrors.message)}
             </Typography>
-            {this.state.error && (
+            {error && (
               <span style={{ color: "red" }}>
-                {this.state.error.graphQLErrors[0].message}
+                {error.graphQLErrors[0].message}
               </span>
             )}
           </form>

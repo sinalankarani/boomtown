@@ -1,6 +1,7 @@
 const styles = theme => ({
   profileContainer: {
-    padding: 100,
+    paddingTop: 100,
+    padding: 50,
     backgroundColor: theme.palette.secondary.main
   },
   profileInfo: {
@@ -15,7 +16,8 @@ const styles = theme => ({
     flexDirection: "row"
   },
   sharedItemsTitle: {
-    color: theme.palette.primary.main
+    color: theme.palette.primary.main,
+    textAlign: "center"
   },
   username: {
     color: "grey"
